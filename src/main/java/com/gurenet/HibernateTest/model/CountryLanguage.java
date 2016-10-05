@@ -1,36 +1,40 @@
 package com.gurenet.HibernateTest.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="countrylanguage")
-public class CountryLanguage {
+public class CountryLanguage  implements Serializable{
 	
-	@Id
-	@Column(name="Language")
-	private String language;
+	private static final long serialVersionUID = -2229471888742168169L;
+
+	@EmbeddedId
+    private CountryLanguagePK countryLanguagePK;
 	
-	@Column(name="CountryCode")
-	private String countryCode;
-	
-	public String getCountryCode() {
-		return countryCode;
+	@Column(name="IsOfficial")
+	private String isOfficial;
+
+	public CountryLanguagePK getCountryLanguagePK() {
+		return countryLanguagePK;
 	}
 
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
+	public void setCountryLanguagePK(CountryLanguagePK countryLanguagePK) {
+		this.countryLanguagePK = countryLanguagePK;
 	}
 
-	public String getLanguage() {
-		return language;
+	public String getIsOfficial() {
+		return isOfficial;
 	}
 
-	public void setLanguage(String language) {
-		this.language = language;
+	public void setIsOfficial(String isOfficial) {
+		this.isOfficial = isOfficial;
 	}
+	
 	
 	
 }

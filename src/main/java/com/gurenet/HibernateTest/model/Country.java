@@ -28,7 +28,7 @@ public class Country {
 	@JoinColumn(name = "Capital")
 	private City capital;
 	
-	@OneToMany(mappedBy="countryCode")
+	@OneToMany(mappedBy="countryLanguagePK")
 	private Set<CountryLanguage> countryLanguages;
 
 	public String getCode() {
