@@ -1,14 +1,16 @@
 package com.gurenet.HibernateTest;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.gurenet.HibernateTest.model.City;
 import com.gurenet.HibernateTest.model.Country;
+import com.gurenet.HibernateTest.model.CountryLanguage;
 
 /**
  * Hello world!
@@ -21,8 +23,12 @@ public class App {
 				.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/world")
 				.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
 				.setProperty("hibernate.connection.username", "root").setProperty("hibernate.connection.password", "")
-				.setProperty("hibernate.show_sql", "true")
-				.setProperty("hibernate.current_session_context_class", "thread").addAnnotatedClass(Country.class);
+				//.setProperty("hibernate.show_sql", "true")
+				.setProperty("hibernate.current_session_context_class", "thread")
+				.addAnnotatedClass(Country.class)
+				.addAnnotatedClass(City.class)
+				.addAnnotatedClass(CountryLanguage.class)
+				;
 
 		SessionFactory sf = cfg.buildSessionFactory();
 		Session s = sf.getCurrentSession();
@@ -30,10 +36,15 @@ public class App {
 		// Obtenemos los paises
 		s.beginTransaction();	
 		Criteria c = s.createCriteria(Country.class);
-		c.setFetchMode("cities", FetchMode.SELECT);
+		//c.setFetchMode("cities", FetchMode.SELECT);
 		List<Country> countries = c.list();
+		for(Country country: countries){
+			City capital = country.getCapital();
+			Set<CountryLanguage> languages = country.getCountryLanguages();
+			System.out.println(country.getName() + " -> " + (capital == null ? "" : capital.getName()) + " total: " + languages.size() + " languages");
+		}
 		s.getTransaction().commit();
-		
+		System.out.println("OK!");
 		//c.setFetchMode("alumnos", FetchMode.JOIN);
 		
 	}

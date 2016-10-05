@@ -2,11 +2,10 @@ package com.gurenet.HibernateTest.model;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,10 +24,11 @@ public class Country {
 	@OneToMany(mappedBy="id")
 	private Set<City> cities;
 	
-	@OneToOne(mappedBy="id", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "Capital")
 	private City capital;
 	
-	@OneToMany(mappedBy="countrylanguage")
+	@OneToMany(mappedBy="countryCode")
 	private Set<CountryLanguage> countryLanguages;
 
 	public String getCode() {
@@ -70,6 +70,4 @@ public class Country {
 	public void setCountryLanguages(Set<CountryLanguage> countryLanguages) {
 		this.countryLanguages = countryLanguages;
 	}
-	
-	
 }
