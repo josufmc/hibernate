@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -37,6 +38,8 @@ public class App {
 		s.beginTransaction();	
 		Criteria c = s.createCriteria(Country.class);
 		//c.setFetchMode("cities", FetchMode.SELECT);
+		c.setFetchMode("cities", FetchMode.JOIN);	// Lo ponemos así porque mejor que saque más datos que varias consultas
+		c.setFetchMode("capital", FetchMode.JOIN);
 		List<Country> countries = c.list();
 		for(Country country: countries){
 			City capital = country.getCapital();
@@ -45,7 +48,6 @@ public class App {
 		}
 		s.getTransaction().commit();
 		System.out.println("OK!");
-		//c.setFetchMode("alumnos", FetchMode.JOIN);
 		
 	}
 }
