@@ -1,4 +1,4 @@
-package com.gurenet.HibernateTest.model;
+package com.csanluis.HibernateTest.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

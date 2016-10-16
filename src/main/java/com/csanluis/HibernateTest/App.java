@@ -1,4 +1,4 @@
-package com.gurenet.HibernateTest;
+package com.csanluis.HibernateTest;
 
 import java.util.List;
 import java.util.Set;
@@ -9,9 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.gurenet.HibernateTest.model.City;
-import com.gurenet.HibernateTest.model.Country;
-import com.gurenet.HibernateTest.model.CountryLanguage;
+import com.csanluis.HibernateTest.model.City;
+import com.csanluis.HibernateTest.model.Country;
+import com.csanluis.HibernateTest.model.CountryLanguage;
 
 /**
  * Aplicación de prueba para las cachés L1 y L2 de Hibernate
